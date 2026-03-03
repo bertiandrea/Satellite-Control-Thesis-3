@@ -144,19 +144,19 @@ CONFIG = {
             "observations": {
                 "distribution": "uniform", # "uniform" or "gaussian"
                 "operation": "scaling", # "scaling" or "addition"
-                "range": [0.9999, 1.0001], # gaussian: [mu, var], uniform: [low, high]
-                "quaternion_noise": 0.0001,
+                "range": [1.01, 0.99], # gaussian: [mu, var], uniform: [low, high]
+                "quaternion_noise": 0.01,
             },
             "states": {
                 "distribution": "uniform", # "uniform" or "gaussian"
                 "operation": "scaling", # "scaling" or "addition"
-                "range": [0.9999, 1.0001], # gaussian: [mu, var], uniform: [low, high]
-                "quaternion_noise": 0.0001,
+                "range": [1.01, 0.99], # gaussian: [mu, var], uniform: [low, high]
+                "quaternion_noise": 0.01,
             },
             "actions": {
                 "distribution": "uniform", # "uniform" or "gaussian"
                 "operation": "scaling", # "scaling" or "addition"
-                "range": [0.9999, 1.0001], # gaussian: [mu, var], uniform: [low, high]
+                "range": [1.01, 0.99], # gaussian: [mu, var], uniform: [low, high]
             },
             "actor_params": {
                 "satellite": {
