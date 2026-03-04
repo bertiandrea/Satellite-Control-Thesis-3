@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # --- CONFIGURAZIONE ---
-EXPECTED_SEEDS = [420, 4200, 42000, 420000, 4200000, 420, 4200, 42000, 420000, 4200000]  # lista: può contenere duplicati
+EXPECTED_SEEDS = [420, 4200, 42000, 420000, 4200000]  # lista: può contenere duplicati
 EXPECTED_COUNTS = Counter(EXPECTED_SEEDS)
 EXPECTED_N = len(EXPECTED_SEEDS)
 
@@ -76,7 +76,7 @@ def main():
     ap = argparse.ArgumentParser(description="AUDIT/MOVE configs and runs with exact timestamp matching")
     ap.add_argument("--mode", choices=["audit", "move"], required=True,
                     help="audit: only checks, move: organize into agent_*")
-    ap.add_argument("--root", default="~/Satellite-Control-Thesis/Evaluating",
+    ap.add_argument("--root", default="~/Satellite-Control-Thesis-3/Evaluating",
                     help="Evaluating root (default: %(default)s)")
     ap.add_argument("--config-dir", default="run_config",
                     help="relative to root (default: %(default)s)")
