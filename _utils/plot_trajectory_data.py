@@ -1,9 +1,10 @@
 import torch
 import matplotlib.pyplot as plt
 import random
+import os
 
 N_ENV_PLOT = 32
-LOG_PATH = "/home/andreaberti/Satellite-Control-Thesis/Evaluating/logs/logs_base/agent_86400/trajectories_20260128_174716.pt"
+LOG_PATH = "/home/andreaberti/Satellite-Control-Thesis-3/Evaluating/logs/logs_base_1/agent_86400/trajectories_20260128_174539.pt"
 
 print(f"Caricamento log da: {LOG_PATH}")
 data = torch.load(LOG_PATH, map_location="cpu", weights_only=True)
@@ -20,13 +21,20 @@ env_indices = random.sample(range(num_envs), min(N_ENV_PLOT, num_envs))
 def plot_component(title, data_all, labels, non_negative=False, log_scale=False):
     C = data_all.shape[2]
 
+    cmap = plt.get_cmap("gist_rainbow")
+
     # ------------- LINEAR -------------
     plt.figure(figsize=(14, 3*C))
     for i, label in enumerate(labels):
         plt.subplot(C,1,i+1)
 
-        for env in env_indices:
-            plt.plot(steps, data_all[:, env, i], alpha=0.8)
+        for j, env in enumerate(env_indices):
+            plt.plot(
+                steps,
+                data_all[:, env, i],
+                alpha=0.8,
+                color=cmap(j / (len(env_indices)-1))  
+            )
         mean = data_all[:,:,i].mean(dim=1)
         plt.plot(steps, mean, color='black')
 
@@ -41,7 +49,7 @@ def plot_component(title, data_all, labels, non_negative=False, log_scale=False)
         plt.grid(True, which='both', linestyle='--', alpha=0.5)
     plt.xlabel("Step")
     plt.tight_layout()
-    plt.savefig(f"{title.replace(' ','_').lower()}.png", dpi=600)
+    plt.savefig(f"_img/plots_trajectories_env/{title.replace(' ','_').lower()}.png", dpi=600)
     plt.close()
 
     # ------------- LOG -------------
@@ -50,8 +58,13 @@ def plot_component(title, data_all, labels, non_negative=False, log_scale=False)
         for i, label in enumerate(labels):
             plt.subplot(C,1,i+1)
             
-            for env in env_indices:
-                plt.plot(steps, data_all[:, env, i], alpha=0.8)
+            for j, env in enumerate(env_indices):
+                plt.plot(
+                    steps,
+                    data_all[:, env, i],
+                    alpha=0.8,
+                    color=cmap(j / (len(env_indices)-1))  
+              )
             mean = data_all[:,:,i].mean(dim=1)
             plt.plot(steps, mean, color='black')
 
@@ -68,10 +81,10 @@ def plot_component(title, data_all, labels, non_negative=False, log_scale=False)
             plt.grid(True, which='both', linestyle='--', alpha=0.5)
         plt.xlabel("Step")
         plt.tight_layout()
-        plt.savefig(f"{title.replace(' ','_').lower()}_log.png", dpi=600)
+        plt.savefig(f"_img/plots_trajectories_env/{title.replace(' ','_').lower()}_log.png", dpi=600)
         plt.close()
 
-
+os.makedirs("_img/plots_trajectories_env", exist_ok=True)
 plot_component("Quaternion", quat_all, ["x","y","z","w"])
 plot_component("Angular difference (deg)", ang_diff_all, ["angle (deg)"], non_negative=True, log_scale=True)
 plot_component("Angular velocity", angvel_all, ["x","y","z"])
