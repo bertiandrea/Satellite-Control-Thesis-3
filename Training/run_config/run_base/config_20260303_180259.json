@@ -103,26 +103,26 @@
                 "distribution": "uniform",
                 "operation": "scaling",
                 "range": [
-                    0.99,
-                    1.01
+                    1.0,
+                    1.0
                 ],
-                "quaternion_noise": 0.01
+                "quaternion_noise": 0.0
             },
             "states": {
                 "distribution": "uniform",
                 "operation": "scaling",
                 "range": [
-                    0.99,
-                    1.01
+                    1.0,
+                    1.0
                 ],
-                "quaternion_noise": 0.01
+                "quaternion_noise": 0.0
             },
             "actions": {
                 "distribution": "uniform",
                 "operation": "scaling",
                 "range": [
-                    0.99,
-                    1.01
+                    1.0,
+                    1.0
                 ]
             },
             "actor_params": {
@@ -133,8 +133,8 @@
                             "distribution": "uniform",
                             "operation": "scaling",
                             "range": [
-                                0.9,
-                                1.1
+                                0.99,
+                                1.01
                             ]
                         }
                     }

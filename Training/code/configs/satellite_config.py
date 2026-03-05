@@ -144,19 +144,19 @@ CONFIG = {
             "observations": {
                 "distribution": "uniform", # "uniform" or "gaussian"
                 "operation": "scaling", # "scaling" or "addition"
-                "range": [1.01, 0.99], # gaussian: [mu, var], uniform: [low, high]
-                "quaternion_noise": 0.01,
+                "range": [1.0, 1.0], # gaussian: [mu, var], uniform: [low, high]
+                "quaternion_noise": 0.0,
             },
             "states": {
                 "distribution": "uniform", # "uniform" or "gaussian"
                 "operation": "scaling", # "scaling" or "addition"
-                "range": [1.01, 0.99], # gaussian: [mu, var], uniform: [low, high]
-                "quaternion_noise": 0.01,
+                "range": [1.0, 1.0], # gaussian: [mu, var], uniform: [low, high]
+                "quaternion_noise": 0.0,
             },
             "actions": {
                 "distribution": "uniform", # "uniform" or "gaussian"
                 "operation": "scaling", # "scaling" or "addition"
-                "range": [1.01, 0.99], # gaussian: [mu, var], uniform: [low, high]
+                "range": [1.0, 1.0], # gaussian: [mu, var], uniform: [low, high]
             },
             "actor_params": {
                 "satellite": {
@@ -165,7 +165,7 @@ CONFIG = {
                         "inertia": {
                             "distribution": "uniform", # "uniform" or "gaussian"
                             "operation": "scaling", # "scaling" or "addition"
-                            "range": [0.90, 1.10], # gaussian: [mu, var], uniform: [low, high]
+                            "range": [1.0, 1.0], # gaussian: [mu, var], uniform: [low, high]
                         }
                     }
                 }
