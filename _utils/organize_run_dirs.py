@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # --- CONFIGURAZIONE ---
-EXPECTED_SEEDS = [420, 4200, 42000, 420000, 4200000]  # lista: può contenere duplicati
+EXPECTED_SEEDS = [420, 4200, 42000, 420000, 4200000, 420, 4200, 42000, 420000, 4200000]  # lista: può contenere duplicati
 EXPECTED_COUNTS = Counter(EXPECTED_SEEDS)
 EXPECTED_N = len(EXPECTED_SEEDS)
 
@@ -90,6 +90,8 @@ def main():
                     help="delta seconds applied to logs timestamp matching (default: %(default)s)")
     ap.add_argument("--no-log", action="store_true",
                     help="exclude log files from checks and moves (only for move mode)")
+    ap.add_argument("--no-seed", action="store_true",
+                    help="exclude seed checks")
 
     args = ap.parse_args()
 
@@ -170,18 +172,19 @@ def main():
                 planned_moves.append((log_file, log_base / agent_dir / log_file.name))
 
     # --- SEEDS check ---
-    for (prefix, agent_id), seeds in seeds_by_key.items():
-        found_counts = Counter(seeds)
+    if not args.no_seed:
+        for (prefix, agent_id), seeds in seeds_by_key.items():
+            found_counts = Counter(seeds)
 
-        if len(seeds) != EXPECTED_N:
-            errors.append(
-                f"Agente {agent_id} ({prefix}): numero seed trovato {len(seeds)} (atteso {EXPECTED_N})"
-            )
+            if len(seeds) != EXPECTED_N:
+                errors.append(
+                    f"Agente {agent_id} ({prefix}): numero seed trovato {len(seeds)} (atteso {EXPECTED_N})"
+                )
 
-        if found_counts != EXPECTED_COUNTS:
-            errors.append(
-                f"Agente {agent_id} ({prefix}): seed trovati {dict(found_counts)} (attesi {dict(EXPECTED_COUNTS)})"
-            )
+            if found_counts != EXPECTED_COUNTS:
+                errors.append(
+                    f"Agente {agent_id} ({prefix}): seed trovati {dict(found_counts)} (attesi {dict(EXPECTED_COUNTS)})"
+                )
 
     if errors:
         print(f"\n[FAIL] {args.mode.upper()} fallito con {len(errors)} errori:")
