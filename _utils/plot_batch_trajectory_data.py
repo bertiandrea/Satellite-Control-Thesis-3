@@ -82,6 +82,7 @@ def main():
     grouped = defaultdict(list)
     for p in paths:
         gid = "/".join(p.relative_to(base_path).parts[:2])
+        print(f"Found file: {p} (group: {gid})")
         grouped[gid].append(p)
 
     out = Path(args.outdir)
@@ -130,7 +131,8 @@ def main():
                     list_metric.append(d_val)
 
                 list_of_data.append((gid, list_steps[0], torch.cat(list_metric, dim=1)))
-                del list_steps, list_metric; gc.collect()
+                del list_steps, list_metric
+                gc.collect()
             except Exception as e:
                 print(f"   [!] Error loading {gid} metric={metric}: {e}")
 
@@ -138,6 +140,7 @@ def main():
 
     def update_summary(metric_key: str, data_list):
         for gid, steps, tensor in data_list:  # tensor: (T, E, C)
+            print(f"Updating summary for {gid} metric={metric_key}")
             if args.method == "median":
                 curve = tensor[:, :, 0].median(dim=1).values.numpy()
             else:
@@ -146,45 +149,54 @@ def main():
 
     data = load_metric_for_all_groups("quat")
     plot_component_across_files(out, "Quaternion", data, ["x", "y", "z", "w"], method=args.method)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("angdiff")
     update_summary("phi_mean", data)
     plot_component_across_files(out, "Angular Difference", data, ["angle"], method=args.method, non_negative=True, log_scale=True, log_threshold=1e0)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("angvel")
     plot_component_across_files(out, "Angular Velocity", data, ["x", "y", "z"], method=args.method)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("angacc")
     plot_component_across_files(out, "Angular Acceleration", data, ["x", "y", "z"], method=args.method)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("actions")
     plot_component_across_files(out, "Actions", data, ["x", "y", "z"], method=args.method, log_scale=True, log_threshold=1e0)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("energy")
     update_summary("energy_mean", data)
     plot_component_across_files(out, "Action Energy ||a_t||^2", data, ["energy"], method=args.method, non_negative=True, log_scale=True, log_threshold=1e2)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("denergy")
     update_summary("du_energy_mean", data)
     plot_component_across_files(out, "Action Delta Energy ||a_t-a_{t-1}||^2", data, ["delta_energy"], method=args.method, non_negative=True, log_scale=True, log_threshold=1e2)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     data = load_metric_for_all_groups("maxaction")
     update_summary("max_torque_mean", data)
     plot_component_across_files(out, "Max Action", data, ["max_action"], method=args.method, non_negative=True, log_scale=True, log_threshold=1e1)
-    del data; gc.collect()
+    del data
+    gc.collect()
 
     # ================== PRINT TABLE ==================
     cols = ["phi_mean", "energy_mean", "du_energy_mean", "max_torque_mean"]
 
     base_runs = sorted([gid for gid in results.keys() if "_noise" not in gid], key=nat_key)
-
+    print(f"Base runs: {base_runs}")
+    
     sub_h = " |  NOMINAL  |   NOISE   |   DIFF%   "
     name_w = 80
 
@@ -200,7 +212,7 @@ def main():
     for base in base_runs:
         row = f"{base:<{name_w}}"
         p = base.split("/")
-        noise_id = f"{p[0]}_noise/{'/'.join(p[1:])}" if len(p) >= 2 else f"{base}_noise"
+        noise_id = f"{p[0]}_noise/{'/'.join(p[1:])}"
 
         for c in cols:
             v_nom = results.get(base, {}).get(c, None)
