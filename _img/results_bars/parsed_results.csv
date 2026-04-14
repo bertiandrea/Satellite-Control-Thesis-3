@@ -1,0 +1,17 @@
+run_id,phi_mean_nominal,phi_mean_noise,phi_mean_diff,energy_mean_nominal,energy_mean_noise,energy_mean_diff,du_energy_me_nominal,du_energy_me_noise,du_energy_me_diff,max_torque_m_nominal,max_torque_m_noise,max_torque_m_diff,kind,config
+logs_base_N01_IX/agent_86400,1.87,,,1072.13,,,11.03,,,12.28,,,base,N01_IX
+logs_base_N1_IX/agent_86400,1.87,6.05,224.1,1072.13,1535.56,43.2,11.03,970.06,8700.0,12.28,23.64,92.6,base,N1_IX
+logs_base_NX_I1/agent_86400,1.87,3.83,105.2,1072.13,1267.06,18.2,11.03,76.43,593.0,12.28,13.17,7.3,base,NX_I1
+logs_base_NX_I10/agent_86400,1.87,5.07,171.7,1072.13,1398.9,30.5,11.03,126.73,1000.0,12.28,13.71,11.7,base,NX_I10
+logs_randomization_N01_IX/agent_86400,34.61,5.19,-85.0,5190.42,1174.63,-77.4,2539.83,569.09,-77.6,31.69,13.73,-56.7,randomization,N01_IX
+logs_randomization_N1_IX/agent_86400,81.85,2.11,-97.4,14200.0,1663.07,-88.3,3081.76,3468.03,12.5,69.17,21.67,-68.7,randomization,N1_IX
+logs_randomization_NX_I1/agent_86400,41.04,1.37,-96.7,9181.16,504.16,-94.5,12000.0,63.83,-99.5,57.65,8.73,-84.9,randomization,NX_I1
+logs_randomization_NX_I10/agent_86400,49.14,5.59,-88.6,7935.88,774.82,-90.2,5445.62,460.88,-91.5,45.81,3.83,-91.6,randomization,NX_I10
+logs_base_N01_IX/agent_86400,1.28,,,0.01,,,0.0,,,0.08,,,base,N01_IX
+logs_base_N1_IX/agent_86400,1.28,1.35,4.9,0.01,449.47,5900000.0,0.0,547.5,49000000000000.0,0.08,17.41,22000.0,base,N1_IX
+logs_base_NX_I1/agent_86400,1.28,1.28,-0.6,0.01,0.01,0.4,0.0,0.0,2.6,0.08,0.08,-3.2,base,NX_I1
+logs_base_NX_I10/agent_86400,1.28,1.28,-0.4,0.01,0.01,6.3,0.0,0.0,-1.5,0.08,0.08,-3.1,base,NX_I10
+logs_randomization_N01_IX/agent_86400,7.53,0.55,-92.7,114.5,46.71,-59.2,5.19,44.37,754.2,8.93,5.72,-35.9,randomization,N01_IX
+logs_randomization_N1_IX/agent_86400,85.6,0.43,-99.5,15100.0,344.19,-97.7,251.89,462.06,83.4,100.0,15.26,-84.7,randomization,N1_IX
+logs_randomization_NX_I1/agent_86400,19.44,1.09,-94.4,4838.9,0.01,-100.0,2294.79,0.0,-100.0,54.34,0.07,-99.9,randomization,NX_I1
+logs_randomization_NX_I10/agent_86400,16.19,1.16,-92.9,2160.01,0.01,-100.0,0.0,0.0,-91.1,34.75,0.07,-99.8,randomization,NX_I10

@@ -9,14 +9,14 @@ import torch
 from skrl.resources.preprocessors.torch import RunningStandardScaler
 from skrl.resources.schedulers.torch import KLAdaptiveRL
 
-SEED = 420
+SEED = 4200000
 NUM_ENVS = 4096
 EPISODE_LENGTH = 360.0
 HEADLESS = True
 DEBUG_ARROWS = False
 LOG_TRAJECTORIES = True
 
-DR_RANDOMIZATION = False
+DR_RANDOMIZATION = True
 EXPLOSION = False
 
 CONFIG = {
